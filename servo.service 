@@ -1,0 +1,11 @@
+[Unit]
+Description=Sample to show logging from a Python application to systemd
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/servo/run_app.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
