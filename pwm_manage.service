@@ -1,0 +1,11 @@
+[Unit]
+Description=pwm_manage service for systemd
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pwm_manage/run_app.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

@@ -2,4 +2,4 @@
 
 SCRIPT_PATH=$(dirname "$(realpath "$0")")
 . "$SCRIPT_PATH/venv/bin/activate"
-python "$SCRIPT_PATH/app.py"
+python3 "$SCRIPT_PATH/app.py"
