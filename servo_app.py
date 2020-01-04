@@ -3,7 +3,7 @@
 import asyncio
 import websockets
 import json
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
 import logging
@@ -28,78 +28,86 @@ logger.addHandler(journald_handler)
 # optionally set the logging level
 logger.setLevel(logging.DEBUG)
 
+channel1 = 35
+channel2 = 36
+channel3 = 37
+channel4 = 38
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+logger.info('Starting servo service!')
+
+GPIO.setup(channel1, GPIO.OUT)
+GPIO.setup(channel2, GPIO.OUT)
+GPIO.setup(channel3, GPIO.OUT)
+GPIO.setup(channel4, GPIO.OUT)
 
 
-channel1 = 3
-channel2 = 5
-channel3 = 7
-channel4 = 8
+pwm_channel1 = GPIO.PWM(channel1, 1000)
+pwm_channel2 = GPIO.PWM(channel2, 1000)
+pwm_channel3 = GPIO.PWM(channel3, 1000)
+pwm_channel4 = GPIO.PWM(channel4, 1000)
+
+pwm_channel1.stop()
+pwm_channel2.stop()
+pwm_channel3.stop()
+pwm_channel4.stop()
 
 
-def servoDriver(json_list):
+def pwm_controller(manage_list):
 
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setwarnings(False)
-    logger.info('Start servo')
+    left, right = manage_list
+    left = int(left * 100)
+    right = int(right * 100)
+    logger.info(f'left : {left}')
+    logger.info(f'right : {right}')
 
-    GPIO.setup(channel1, GPIO.OUT)
-    GPIO.setup(channel2, GPIO.OUT)
-    GPIO.setup(channel3, GPIO.OUT)
-    GPIO.setup(channel4, GPIO.OUT)
+    if left >= 0 and right >= 0:
+        pwm_channel1.start(abs(left))
+        pwm_channel2.stop()
+        pwm_channel3.start(abs(right))
+        pwm_channel4.stop()
 
-    pwm = GPIO.PWM(channel1, 1000)  # Создаем ШИМ-объект для пина pinPWM с частотой 50 Гц
+        # time.sleep(1)
+        # pwm.ChangeDutyCycle(80)
+        # pwm.stop()  # Останавливаем ШИМ
 
-    pwm.start(50)  # Запускаем ШИМ на пине со скважностью 50% (0-100%)
-    time.sleep(1)
-    # Можно использовать данные типа float - 49.5, 2.45
-    pwm.ChangeDutyCycle(80)  # Изменяем скважность до 80%
-    time.sleep(5)
-    pwm.ChangeFrequency(1000)  # Изменяем частоту до 1000 Гц (также можно float)
-    pwm.stop()  # Останавливаем ШИМ
+    elif left < 0 and right < 0:
 
-def myGpio():
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(led1, GPIO.OUT)
-    GPIO.setup(led2, GPIO.OUT)
-    GPIO.setup(led3, GPIO.OUT)
+        pwm_channel1.stop()
+        pwm_channel2.start(abs(left))
+        pwm_channel3.stop()
+        pwm_channel4.start(abs(right))
 
-    GPIO.setup(switch, GPIO.IN)
+    elif left >= 0 and right < 0:
 
-    for i in range(1000):
-        GPIO.output(led1, GPIO.HIGH)
-        time.sleep(0.2)
-        GPIO.output(led1, GPIO.LOW)
-        time.sleep(0.2)
+        pwm_channel1.start(abs(left))
+        pwm_channel2.stop()
+        pwm_channel3.stop()
+        pwm_channel4.start(abs(right))
 
-        GPIO.output(led2, GPIO.HIGH)
-        time.sleep(0.2)
-        GPIO.output(led2, GPIO.LOW)
-        time.sleep(0.2)
+    elif left < 0 and right >= 0:
 
-        GPIO.output(led3, GPIO.HIGH)
-        time.sleep(0.2)
-        GPIO.output(led3, GPIO.LOW)
-        time.sleep(0.2)
+        pwm_channel1.stop()
+        pwm_channel2.start(abs(left))
+        pwm_channel3.start(abs(right))
+        pwm_channel4.stop()
 
-        print('Switch status = ', GPIO.input(switch))
+    elif left == 0 and right == 0:
 
-    GPIO.cleanup()
+        pwm_channel1.stop()
+        pwm_channel2.stop()
+        pwm_channel3.stop()
+        pwm_channel4.stop()
 
-
-async def hello(websocket, path):
+async def websocket_server (websocket, path):
     jsonCommand = await websocket.recv()
-    # print(f"< {jsonCommand}")
     output_list = json.loads(jsonCommand)
-    print (output_list)
-    # greeting = f"Hello {name}!"
-    #
-    # await websocket.send(greeting)
-    # print(f"> {greeting}")
+    logger.info(f'INPUT json: {output_list}')
+    pwm_controller (output_list)
 
-start_server = websockets.serve(hello, "127.0.0.1", 8765)
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
-
-# if __name__ == '__main__':
-#     pwd()
+if __name__ == '__main__':
+    start_server = websockets.serve(websocket_server, "127.0.0.1", 5685)
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
