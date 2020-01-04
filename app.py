@@ -12,7 +12,7 @@ import time
 from systemd.journal import JournaldLogHandler
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("pwm_manage")
 
 # instantiate the JournaldLogHandler to hook into systemd
 journald_handler = JournaldLogHandler()
