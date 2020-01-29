@@ -11,6 +11,21 @@
 - [x] Запилить сервер который будет парсить json
 - [x] Сделать установщик скрипта
 
+## Install 
+
+Установка представляет собой просто указание Python интерпретатора и названия домена, запустите:
+```shell script
+./install.sh
+```
+
+
+Посмотреть статус pwm_manage демона:
+
+```shell script
+sudo systemctl status pwm_manage
+```
+
+
 ### Static ip to WIFI interface 
 
 add  to /etc/dhcpcd.conf
