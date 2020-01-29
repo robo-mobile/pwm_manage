@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/pwm_manage/run_app.sh
+ExecStart=pwm_manage_path/run_app.sh
 Restart=on-abort
 
 [Install]
