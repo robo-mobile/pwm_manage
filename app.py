@@ -11,7 +11,6 @@ import random
 import time
 from systemd.journal import JournaldLogHandler
 
-
 logger = logging.getLogger("pwm_manage")
 
 # instantiate the JournaldLogHandler to hook into systemd
@@ -42,7 +41,6 @@ GPIO.setup(channel2, GPIO.OUT)
 GPIO.setup(channel3, GPIO.OUT)
 GPIO.setup(channel4, GPIO.OUT)
 
-
 pwm_channel1 = GPIO.PWM(channel1, 1000)
 pwm_channel2 = GPIO.PWM(channel2, 1000)
 pwm_channel3 = GPIO.PWM(channel3, 1000)
@@ -55,7 +53,6 @@ pwm_channel4.stop()
 
 
 def pwm_controller(manage_list):
-
     left, right = manage_list
     left = int(left * 100)
     right = int(right * 100)
@@ -100,11 +97,16 @@ def pwm_controller(manage_list):
         pwm_channel3.stop()
         pwm_channel4.stop()
 
-async def websocket_server (websocket, path):
-    jsonCommand = await websocket.recv()
-    output_list = json.loads(jsonCommand)
+
+async def consumer(message):
+    output_list = json.loads(message)
     logger.info(f'INPUT json: {output_list}')
-    pwm_controller (output_list)
+    pwm_controller(output_list)
+
+
+async def websocket_server(websocket, path):
+    async for message in websocket:
+        await consumer(message)
 
 
 if __name__ == '__main__':
