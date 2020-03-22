@@ -4,6 +4,8 @@ SCRIPT_PATH=/usr/bin/
 PROJECT=https://github.com/eleutherius/pwm_manage.git
 PROJECT_NAME=pwm_manage
 
+set -xe
+
 function install() {
 
 
@@ -31,6 +33,7 @@ function remove() {
   sudo systemctl daemon-reload
   sudo systemctl start pwm_manage
   sudo systemctl enable pwm_manage
+  echo "removing done!"
 
 }
 
