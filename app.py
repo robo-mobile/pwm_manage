@@ -121,10 +121,10 @@ class L298 ():
         GPIO.setup(self.in3, GPIO.OUT)
         GPIO.setup(self.in4, GPIO.OUT)
 
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.LOW)
-        GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.LOW)
+        GPIO.output(self.in1, GPIO.LOW)
+        GPIO.output(self.in2, GPIO.LOW)
+        GPIO.output(self.in3, GPIO.LOW)
+        GPIO.output(self.in4, GPIO.LOW)
 
         self.pwm_enA = GPIO.PWM(self.enA, 1000)
         self.pwm_enB = GPIO.PWM(self.enB, 1000)
