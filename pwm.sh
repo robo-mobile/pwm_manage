@@ -28,11 +28,9 @@ function remove() {
 
   sudo systemctl stop pwm_manage
   sudo systemctl disable pwm_manage
+  sudo rm /etc/systemd/system/$PROJECT_NAME.service
   sudo rm -rf $SCRIPT_PATH$PROJECT_NAME
-
   sudo systemctl daemon-reload
-  sudo systemctl start pwm_manage
-  sudo systemctl enable pwm_manage
   echo "removing done!"
 
 }
@@ -66,6 +64,10 @@ install
 
 elif [[ "$1" == "remove" ]]; then
 echo "Removing $PROJECT_NAME ..."
+remove
+
+elif [[ "$1" == "update" ]]; then
+update
 
 elif [[ "$1" == "help" ]]; then
 help

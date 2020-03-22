@@ -101,12 +101,12 @@ class StandartPWM():
 class L298 ():
 
     def __init__(self):
-        self.enA = 35
-        self.in1 = 36
-        self.in2 = 37
+        self.enA = 33
+        self.in1 = 35
+        self.in2 = 36
 
-        self.enB = 38
-        self.in3 = 39
+        self.enB = 37
+        self.in3 = 38
         self.in4 = 40
 
 
