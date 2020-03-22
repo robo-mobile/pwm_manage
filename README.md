@@ -4,18 +4,24 @@
 
 ## ROADMAP
 
-- [x] Добавить добавить логирование в journalctl 
-- [x] Добавить возможность делать использования программного ШИМ 
+- [x] Добавить добавить логирование в journalctl
+- [x] Добавить возможность делать использования программного ШИМ
 - [x] Добавить подключение по WI-FI
-- [x] Добавить тестовый клиент который будет пулять json 
+- [x] Добавить тестовый клиент который будет пулять json
 - [x] Запилить сервер который будет парсить json
 - [x] Сделать установщик скрипта
 
-## Install 
+## Install
 
-Установка представляет собой просто указание Python интерпретатора и названия домена, запустите:
 ```shell script
-./install.sh
+./pwm.sh help
+Usage: pwm.sh  [OPTION]
+pwm manager (install|remove|update).
+OPTION                   DESCRIPTION
+install            install $PROJECT_NAME script
+remove             stop and remove $PROJECT_NAME script from your system
+update             update $PROJECT_NAME script on your system
+help               show help message "
 ```
 
 
@@ -26,7 +32,7 @@ sudo systemctl status pwm_manage
 ```
 
 
-### Static ip to WIFI interface 
+### Static ip to WIFI interface
 
 add  to /etc/dhcpcd.conf
 ```
