@@ -1,15 +1,6 @@
 # pwm manage
 
-Это кучка скриптов населена на управление двигателями через  RPI3B
-
-## ROADMAP
-
-- [x] Добавить добавить логирование в journalctl
-- [x] Добавить возможность делать использования программного ШИМ
-- [x] Добавить подключение по WI-FI
-- [x] Добавить тестовый клиент который будет пулять json
-- [x] Запилить сервер который будет парсить json
-- [x] Сделать установщик скрипта
+This bunch of scripts populated on engine control via RPI
 
 ## Install
 
@@ -24,8 +15,7 @@ update             update $PROJECT_NAME script on your system
 help               show help message "
 ```
 
-
-Посмотреть статус pwm_manage демона:
+View pwm_manage daemon status:
 
 ```shell script
 sudo systemctl status pwm_manage

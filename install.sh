@@ -1,10 +1,23 @@
 #!/bin/bash
 
 SCRIPT_PATH=/usr/bin/
-PROJECT=https://github.com/eleutherius/pwm_manage.git
+PROJECT=https://github.com/robo-mobile/pwm_manage
 PROJECT_NAME=pwm_manage
 
 set -xe
+
+function service_end_point () {
+    
+cat > $SCRIPT_PATH/$PROJECT_NAME/run_app.sh <<END
+#!/bin/bash
+
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
+. "$SCRIPT_PATH/venv/bin/activate"
+python3 "$SCRIPT_PATH/app.py"
+
+END
+
+}
 
 function install() {
 

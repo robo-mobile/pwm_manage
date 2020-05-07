@@ -2,3 +2,4 @@ asyncio==3.4.3
 RPi.GPIO==0.7.0
 systemd==0.16.1
 websockets==8.1
+typer==0.2.1
