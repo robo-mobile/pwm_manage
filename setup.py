@@ -38,8 +38,9 @@ setuptools.setup(
         ]
     },
 
-    install_requires=[ 'typer'],
+    install_requires=[ 'typer', 'loguru', 'RPi.GPIO', 'asyncio', 'websockets', 'systemd', 
+    'toml'],
 
-    url = 'https://git.visonic/Automation/pmautomation/tree/oliakhov/tools/utool'
+    url = 'https://github.com/robo-mobile/pwm_manage'
 
 )

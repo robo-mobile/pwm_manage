@@ -6,20 +6,20 @@ import json
 import RPi.GPIO as GPIO
 import time
 
-import logging
+# import logging
+from loguru import logger
 import random
 import time
 from systemd.journal import JournaldLogHandler
 
-logger = logging.getLogger("pwm_manage")
+logger = logger.getLogger("pwm_manage")
 
 # instantiate the JournaldLogHandler to hook into systemd
 journald_handler = JournaldLogHandler()
 
 # set a formatter to include the level name
-journald_handler.setFormatter(logging.Formatter(
-    '[%(levelname)s] %(message)s'
-))
+journald_handler.setFormatter(logger.add(sys.stderr, format="{time} {level} {message}",
+ filter="my_module", level="INFO"))
 
 # add the journald handler to the current logger
 logger.addHandler(journald_handler)
@@ -53,7 +53,7 @@ class StandartPWM():
         self.pwm_channel3.stop()
         self.pwm_channel4.stop()
 
-    def pwm_controller(self, manage_list):
+    async def pwm_controller(self, manage_list):
         left, right = manage_list
         left = int(left * 100)
         right = int(right * 100)

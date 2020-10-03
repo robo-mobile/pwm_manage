@@ -31,3 +31,9 @@ static ip_address=192.168.99.20
 static routers=192.168.99.1
 static domain_name_servers=8.8.8.8
 ```
+### ROAD MAP 
+
+[ ] add loguru logger
+[ ] make asymc function for the pwm manager 
+[ ] make module from this bunch of scripts
+[ ] add .toml config support 
