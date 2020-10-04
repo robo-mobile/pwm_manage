@@ -2,9 +2,11 @@
 It's a simple script to set up pwm engine
 """
 import typer
-from . import *
 import toml
 import os 
+from .default_config import def_config
+from .motor_drives import *
+from .websocketruner import *
 
 
 app = typer.Typer(help="Awesome CLI IPMP universal tool.")
