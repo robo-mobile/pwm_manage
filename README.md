@@ -33,6 +33,6 @@ static domain_name_servers=8.8.8.8
 ```
 ### ROAD MAP 
 
-[ ] make asymc function for the pwm manager 
-[ ] make module from this bunch of scripts
-[ ] add .toml config support 
+- [ ] make asymc function for the pwm manager
+- [x] make module from this bunch of scripts
+- [ ] add .toml config support
