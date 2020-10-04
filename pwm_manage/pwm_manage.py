@@ -1,5 +1,5 @@
 """
-It's a simple script to set up ipmp server
+It's a simple script to set up pwm engine
 """
 import typer
 from . import *
