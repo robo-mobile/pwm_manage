@@ -4,6 +4,7 @@ It's a simple script to set up pwm engine
 import typer
 from . import *
 import toml
+import os 
 
 
 app = typer.Typer(help="Awesome CLI IPMP universal tool.")
