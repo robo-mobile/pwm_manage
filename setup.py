@@ -34,11 +34,11 @@ setuptools.setup(
     setup_requires=['wheel'],
     entry_points={
         'console_scripts': [
-            'pwm_manage = pwm_manage.pwm_manage:app'
+            'pwm = pwm_manage.pwm_manage:app'
         ]
     },
 
-    install_requires=[ 'typer', 'loguru', 'RPi.GPIO', 'asyncio', 'websockets', 'systemd', 
+    install_requires=[ 'typer', 'RPi.GPIO', 'asyncio', 'websockets', 'systemd', 
     'toml'],
 
     url = 'https://github.com/robo-mobile/pwm_manage'

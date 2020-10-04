@@ -41,7 +41,7 @@ def init():
     redundancy init
     """
     if not os.path.isfile("config.toml"):
-        print (f"Generate {conf} config file")
+        print (f"Generate config.toml config file")
         with open("config.toml", 'w') as f:
             f.write(def_config)
 
