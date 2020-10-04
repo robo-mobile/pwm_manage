@@ -7,7 +7,7 @@ class driver():
     channels:dict
 
 
-class StandartPWM(drive):
+class StandartPWM(driver):
     def __init__(self):
         self.channel1 = 35
         self.channel2 = 36
