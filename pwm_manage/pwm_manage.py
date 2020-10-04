@@ -2,40 +2,34 @@
 It's a simple script to set up ipmp server
 """
 import typer
-from .default_config import *
+from . import *
 import toml
 
-from . import *
 
 app = typer.Typer(help="Awesome CLI IPMP universal tool.")
 
 
-conf="config.toml"
+import logging
+from systemd.journal import JournaldLogHandler
 
-def init_config():
-    """
-    Create redundancy.toml config file
 
-    Example of using:
-    redundancy init
-    """
-   
+logger = logging.getLogger("pwm_manage")
 
-    import os.path
-    if os.path.isfile(conf):
-        print ("Config file already exists")
-        pass
-    if not os.path.isfile(conf):
-        print (f"Generate {conf} config file")
-        with open(conf, 'w') as f:
-            f.write(def_config)
+# instantiate the JournaldLogHandler to hook into systemd
+journald_handler = JournaldLogHandler()
 
-try:   
-    config = toml.load(conf)
-except: 
-    print (f"File {conf} not exist!")
+# set a formatter to include the level name
+journald_handler.setFormatter(logging.Formatter(
+    '[%(levelname)s] %(message)s'
+))
 
-app = typer.Typer(help="Awesome CLI redundancy universal tool.")
+# add the journald handler to the current logger
+logger.addHandler(journald_handler)
+logger.addHandler(logging.StreamHandler())
+
+# optionally set the logging level
+logger.setLevel(logging.DEBUG)
+
 
 @app.command()
 def init():
@@ -45,7 +39,10 @@ def init():
     Example of using:
     redundancy init
     """
-    init_config()
+    if not os.path.isfile("config.toml"):
+        print (f"Generate {conf} config file")
+        with open("config.toml", 'w') as f:
+            f.write(def_config)
 
 
 @app.command()
@@ -57,8 +54,21 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
     Example of using:
     pwm start --conf=/etc/pwm/config.toml
     """
-    print ('hello') 
+    config:str
 
+    if conf is None:
+        if os.path.isfile("./config.toml"):
+            config =  "./config.toml"
+        if not os.path.isfile("./config.toml"):
+            print ("Config file not exists!")
+            exit (2)
+    if conf is not None: 
+        config = conf     
+    
+    config = toml.load(config)
+
+    engine = double_l298n(logger = logger, channels = config.some )
+    runne = WebSoketRunner(logger = logger, engine = engine)   
 
 if __name__ == '__main__':
     app()

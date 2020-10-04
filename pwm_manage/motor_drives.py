@@ -1,33 +1,13 @@
-#!/usr/bin/env python3
-
-import asyncio
-import websockets
-import json
 import RPi.GPIO as GPIO
-import time
 
-# import logging
-from loguru import logger
-import random
-import time
-from systemd.journal import JournaldLogHandler
 
-logger = logger.getLogger("pwm_manage")
 
-# instantiate the JournaldLogHandler to hook into systemd
-journald_handler = JournaldLogHandler()
+class driver():
+    logger:object
+    channels:dict
 
-# set a formatter to include the level name
-journald_handler.setFormatter(logger.add(sys.stderr, format="{time} {level} {message}",
- filter="my_module", level="INFO"))
 
-# add the journald handler to the current logger
-logger.addHandler(journald_handler)
-
-# optionally set the logging level
-logger.setLevel(logging.DEBUG)
-
-class StandartPWM():
+class StandartPWM(drive):
     def __init__(self):
         self.channel1 = 35
         self.channel2 = 36
@@ -36,7 +16,7 @@ class StandartPWM():
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-        logger.info('Starting servo service!')
+        self.logger.info('Starting servo service!')
 
         GPIO.setup(self.channel1, GPIO.OUT)
         GPIO.setup(self.channel2, GPIO.OUT)
@@ -66,10 +46,6 @@ class StandartPWM():
             self.pwm_channel3.start(abs(right))
             self.pwm_channel4.stop()
 
-            # time.sleep(1)
-            # pwm.ChangeDutyCycle(80)
-            # pwm.stop()  # Останавливаем ШИМ
-
         elif left < 0 and right < 0:
 
             self.pwm_channel1.stop()
@@ -98,7 +74,7 @@ class StandartPWM():
             self.pwm_channel3.stop()
             self.pwm_channel4.stop()
 
-class L298 ():
+class L298 (driver):
 
     def __init__(self):
         self.enA = 33
@@ -112,7 +88,7 @@ class L298 ():
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-        logger.info('Starting servo service!')
+        self.logger.info('Starting servo service!')
 
         GPIO.setup(self.enA, GPIO.OUT)
         GPIO.setup(self.enB, GPIO.OUT)
@@ -136,8 +112,8 @@ class L298 ():
         left, right = manage_list
         left = int(left * 100)
         right = int(right * 100)
-        logger.info(f'left : {left}')
-        logger.info(f'right : {right}')
+        self.logger.info(f'left : {left}')
+        self.logger.info(f'right : {right}')
 
         if left >= 0 and right >= 0:
 
@@ -190,21 +166,6 @@ class L298 ():
             GPIO.output(self.in3, GPIO.LOW)
             GPIO.output(self.in4, GPIO.LOW)
 
+class double_l298n (driver):
+    pass
 
-pwm = L298()
-
-async def consumer(message):
-    output_list = json.loads(message)
-    logger.info(f'INPUT json: {output_list}')
-    pwm.pwm_controller(output_list)
-
-
-async def websocket_server(websocket, path):
-    async for message in websocket:
-        await consumer(message)
-
-
-if __name__ == '__main__':
-    start_server = websockets.serve(websocket_server, "127.0.0.1", 5685)
-    asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
