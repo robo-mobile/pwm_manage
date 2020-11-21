@@ -1,10 +1,10 @@
 import RPi.GPIO as GPIO
-
+from .logger import logger
 
 
 class driver():
-    logger:object
-    channels:dict
+    logger: object
+    channels: dict
 
 
 class StandartPWM(driver):
@@ -16,7 +16,7 @@ class StandartPWM(driver):
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-        self.logger.info('Starting servo service!')
+        self.logger.debug('Starting servo service!')
 
         GPIO.setup(self.channel1, GPIO.OUT)
         GPIO.setup(self.channel2, GPIO.OUT)
@@ -37,8 +37,8 @@ class StandartPWM(driver):
         left, right = manage_list
         left = int(left * 100)
         right = int(right * 100)
-        logger.info(f'left : {left}')
-        logger.info(f'right : {right}')
+        logger.debug(f'left : {left}')
+        logger.debug(f'right : {right}')
 
         if left >= 0 and right >= 0:
             self.pwm_channel1.start(abs(left))
@@ -74,7 +74,8 @@ class StandartPWM(driver):
             self.pwm_channel3.stop()
             self.pwm_channel4.stop()
 
-class L298 (driver):
+
+class L298(driver):
 
     def __init__(self):
         self.enA = 33
@@ -84,7 +85,6 @@ class L298 (driver):
         self.enB = 37
         self.in3 = 38
         self.in4 = 40
-
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
@@ -166,6 +166,6 @@ class L298 (driver):
             GPIO.output(self.in3, GPIO.LOW)
             GPIO.output(self.in4, GPIO.LOW)
 
-class double_l298n (driver):
-    pass
 
+class double_l298n(driver):
+    pass

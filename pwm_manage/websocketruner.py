@@ -15,7 +15,7 @@ class WebSoketRunner:
 
     async def websocket_server(self, websocket, path):
         async for message in websocket:
-            await consumer(message)
+            await self.consumer(message)
 
     def start(self):
         start_server = websockets.serve(self.websocket_server, "127.0.0.1", 5685)
