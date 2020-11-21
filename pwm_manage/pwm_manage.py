@@ -7,10 +7,28 @@ import os
 from .default_config import def_config
 from .motor_drives import *
 from .websocketruner import *
-from .logger import logger
 
 app = typer.Typer(help="Awesome CLI IPMP universal tool.")
 
+import logging
+from systemd.journal import JournaldLogHandler
+
+
+
+logger = logging.getLogger("pwm_manage")
+journald_handler = JournaldLogHandler()
+
+# set a formatter to include the level name
+journald_handler.setFormatter(logging.Formatter(
+        '[%(levelname)s] %(message)s'
+    ))
+
+# add the journald handler to the current logger
+logger.addHandler(journald_handler)
+logger.addHandler(logging.StreamHandler())
+
+# optionally set the logging level
+logger.setLevel(logging.DEBUG)
 
 
 @app.command()
@@ -50,7 +68,7 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
     config = toml.load(config)
     if config['pwm_type'] == "standart":
 
-        StandartPWM.logger = logger()
+        StandartPWM.logger = logger
         engine = StandartPWM
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()

@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from .logger import logger
+
 
 
 class driver():
