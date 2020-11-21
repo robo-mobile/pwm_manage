@@ -33,8 +33,8 @@ class StandartPWM(driver):
     pwm_channel3.stop()
     pwm_channel4.stop()
 
-    def __init__(self):
-        pass
+    # def __init__(self):
+    #     pass
     # def __init__(self, manage_list: list):
     #
     #     self.manage_list = manage_list
