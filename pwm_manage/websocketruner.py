@@ -3,14 +3,14 @@ import websockets
 import json
 
 class WebSoketRunner:
-    def __init__(self, engine:object, logger:object):
+    def __init__(self, engine: object, logger: object):
         self.engine = engine
         self.logger = logger
 
     async def consumer(self, message):
         output_list = json.loads(message)
         self.logger.debug(f'INPUT json: {output_list}')
-        self.engine(output_list)
+        engine = self.engine(output_list).pwm_controller
 
 
     async def websocket_server(self, websocket, path):
