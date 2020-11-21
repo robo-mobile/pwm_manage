@@ -9,29 +9,29 @@ class driver():
 
 class StandartPWM(driver):
 
-        channel1 = 35
-        channel2 = 36
-        channel3 = 37
-        channel4 = 38
+    channel1 = 35
+    channel2 = 36
+    channel3 = 37
+    channel4 = 38
 
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
         # logger.debug('Starting servo service!')
 
-        GPIO.setup(channel1, GPIO.OUT)
-        GPIO.setup(channel2, GPIO.OUT)
-        GPIO.setup(channel3, GPIO.OUT)
-        GPIO.setup(channel4, GPIO.OUT)
+    GPIO.setup(channel1, GPIO.OUT)
+    GPIO.setup(channel2, GPIO.OUT)
+    GPIO.setup(channel3, GPIO.OUT)
+    GPIO.setup(channel4, GPIO.OUT)
 
-        pwm_channel1 = GPIO.PWM(channel1, 1000)
-        pwm_channel2 = GPIO.PWM(channel2, 1000)
-        pwm_channel3 = GPIO.PWM(channel3, 1000)
-        pwm_channel4 = GPIO.PWM(channel4, 1000)
+    pwm_channel1 = GPIO.PWM(channel1, 1000)
+    pwm_channel2 = GPIO.PWM(channel2, 1000)
+    pwm_channel3 = GPIO.PWM(channel3, 1000)
+    pwm_channel4 = GPIO.PWM(channel4, 1000)
 
-        pwm_channel1.stop()
-        pwm_channel2.stop()
-        pwm_channel3.stop()
-        pwm_channel4.stop()
+    pwm_channel1.stop()
+    pwm_channel2.stop()
+    pwm_channel3.stop()
+    pwm_channel4.stop()
 
     # def __init__(self, manage_list: list):
     #
