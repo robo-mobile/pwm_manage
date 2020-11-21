@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # WS client example
 
 import asyncio
@@ -28,7 +26,7 @@ async def hello():
     for i in list_range:
         async with websockets.connect(uri) as websocket:
             await websocket.send(i)
-            time.sleep (5)
+            time.sleep (0.1)
 
 asyncio.get_event_loop().run_until_complete(hello())
 print(f"TEST [END]\n")
