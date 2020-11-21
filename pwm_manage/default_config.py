@@ -2,7 +2,7 @@ def_config = '''
 
 title = "PWM manager config"
 
-pwm_type = "standart"           # choose  one of: standart/L292N/L292
+pwm_type = "standart"           # choose  one of: standart/L292N/DouL292N
 
 
 # standat pwm engine type

@@ -77,7 +77,7 @@ class StandartPWM(driver):
             self.pwm_channel4.stop()
 
 
-class L298(driver):
+class L298N(driver):
 
     def __init__(self, manage_list: list):
         self.manage_list = manage_list
@@ -170,5 +170,5 @@ class L298(driver):
             GPIO.output(self.in4, GPIO.LOW)
 
 
-class double_l298n(driver):
+class DL298N(driver):
     pass

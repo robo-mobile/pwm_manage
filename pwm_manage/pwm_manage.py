@@ -73,5 +73,17 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
+    elif config['pwm_type'] == "L292N":
+        StandartPWM.logger = logger
+        engine = L298N
+        runner = WebSoketRunner(logger=logger, engine=engine)
+        runner.start()
+
+    elif config['pwm_type'] == "DouL292N":
+        StandartPWM.logger = logger
+        engine = DL298N
+        runner = WebSoketRunner(logger=logger, engine=engine)
+        runner.start()
+
 if __name__ == '__main__':
     app()
