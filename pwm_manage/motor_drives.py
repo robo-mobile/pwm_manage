@@ -1,14 +1,12 @@
 import RPi.GPIO as GPIO
 
 
-
 class driver():
     logger: object
     channels: dict
 
 
 class StandartPWM(driver):
-
     channel1 = 35
     channel2 = 36
     channel3 = 37
@@ -167,6 +165,7 @@ class L298N(driver):
 
 
 class DL298N(driver):
+    """Колеса Илона"""
 
     enA1 = 33
     in11 = 35
@@ -236,9 +235,18 @@ class DL298N(driver):
             GPIO.output(self.in11, GPIO.HIGH)
             GPIO.output(self.in12, GPIO.LOW)
 
+            self.pwm_enA2.start(abs(left))
+            GPIO.output(self.in21, GPIO.HIGH)
+            GPIO.output(self.in22, GPIO.LOW)
+
             self.pwm_enB1.start(abs(right))
             GPIO.output(self.in13, GPIO.HIGH)
             GPIO.output(self.in14, GPIO.LOW)
+
+            self.pwm_enB2.start(abs(right))
+            GPIO.output(self.in23, GPIO.HIGH)
+            GPIO.output(self.in24, GPIO.LOW)
+
 
 
         elif left < 0 and right < 0:
@@ -251,6 +259,14 @@ class DL298N(driver):
             GPIO.output(self.in13, GPIO.LOW)
             GPIO.output(self.in14, GPIO.HIGH)
 
+            self.pwm_enA2.start(abs(left))
+            GPIO.output(self.in21, GPIO.LOW)
+            GPIO.output(self.in22, GPIO.HIGH)
+
+            self.pwm_enB2.start(abs(right))
+            GPIO.output(self.in23, GPIO.LOW)
+            GPIO.output(self.in24, GPIO.HIGH)
+
         elif left >= 0 and right < 0:
 
             self.pwm_enA1.start(abs(left))
@@ -260,6 +276,14 @@ class DL298N(driver):
             self.pwm_enB1.start(abs(right))
             GPIO.output(self.in13, GPIO.LOW)
             GPIO.output(self.in14, GPIO.HIGH)
+
+            self.pwm_enA2.start(abs(left))
+            GPIO.output(self.in21, GPIO.HIGH)
+            GPIO.output(self.in22, GPIO.LOW)
+
+            self.pwm_enB2.start(abs(right))
+            GPIO.output(self.in23, GPIO.LOW)
+            GPIO.output(self.in24, GPIO.HIGH)
 
         elif left < 0 and right >= 0:
 
@@ -271,6 +295,14 @@ class DL298N(driver):
             GPIO.output(self.in13, GPIO.HIGH)
             GPIO.output(self.in14, GPIO.LOW)
 
+            self.pwm_enA2.start(abs(left))
+            GPIO.output(self.in21, GPIO.LOW)
+            GPIO.output(self.in22, GPIO.HIGH)
+
+            self.pwm_enB2.start(abs(right))
+            GPIO.output(self.in23, GPIO.HIGH)
+            GPIO.output(self.in24, GPIO.LOW)
+
         elif left == 0 and right == 0:
 
             self.pwm_enA1.stop()
@@ -280,3 +312,12 @@ class DL298N(driver):
             self.pwm_enB1.stop()
             GPIO.output(self.in13, GPIO.LOW)
             GPIO.output(self.in14, GPIO.LOW)
+
+            self.pwm_enA2.stop()
+            GPIO.output(self.in21, GPIO.LOW)
+            GPIO.output(self.in22, GPIO.LOW)
+
+            self.pwm_enB2.stop()
+            GPIO.output(self.in23, GPIO.LOW)
+            GPIO.output(self.in24, GPIO.LOW)
+
