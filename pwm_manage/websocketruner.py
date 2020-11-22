@@ -4,7 +4,7 @@ import json
 
 class WebSoketRunner:
     def __init__(self, engine: object, logger: object):
-        self.engine = engine
+        self.engine = engine()
         self.logger = logger
 
     async def consumer(self, message):

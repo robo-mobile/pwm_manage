@@ -19,6 +19,7 @@ class StandartPWM(driver):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
 
+
         GPIO.setup(self.channel1, GPIO.OUT)
         GPIO.setup(self.channel2, GPIO.OUT)
         GPIO.setup(self.channel3, GPIO.OUT)
