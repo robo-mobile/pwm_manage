@@ -28,7 +28,7 @@ logger.addHandler(journald_handler)
 logger.addHandler(logging.StreamHandler())
 
 # optionally set the logging level
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 
 @app.command()

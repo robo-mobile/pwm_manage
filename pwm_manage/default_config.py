@@ -4,6 +4,7 @@ title = "PWM manager config"
 
 pwm_type = "standart"           # choose  one of: standart/L292N/DouL292N
 
+log_level = "INFO"              # DEBUG/WARNING/INFO
 
 # standat pwm engine type
 

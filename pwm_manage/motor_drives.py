@@ -187,7 +187,6 @@ class DL298N(driver):
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-        self.logger.debug('Starting servo service!')
 
         GPIO.setup(self.enA1, GPIO.OUT)
         GPIO.setup(self.enB1, GPIO.OUT)
@@ -196,13 +195,88 @@ class DL298N(driver):
         GPIO.setup(self.in13, GPIO.OUT)
         GPIO.setup(self.in14, GPIO.OUT)
 
+        GPIO.setup(self.enA2, GPIO.OUT)
+        GPIO.setup(self.enB2, GPIO.OUT)
+        GPIO.setup(self.in21, GPIO.OUT)
+        GPIO.setup(self.in22, GPIO.OUT)
+        GPIO.setup(self.in23, GPIO.OUT)
+        GPIO.setup(self.in24, GPIO.OUT)
+
         GPIO.output(self.in11, GPIO.LOW)
         GPIO.output(self.in12, GPIO.LOW)
         GPIO.output(self.in13, GPIO.LOW)
         GPIO.output(self.in14, GPIO.LOW)
 
-        self.pwm_enA = GPIO.PWM(self.enA1, 1000)
-        self.pwm_enB = GPIO.PWM(self.enB1, 1000)
+        GPIO.output(self.in21, GPIO.LOW)
+        GPIO.output(self.in22, GPIO.LOW)
+        GPIO.output(self.in23, GPIO.LOW)
+        GPIO.output(self.in24, GPIO.LOW)
 
-        self.pwm_enA.stop()
-        self.pwm_enB.stop()
+        self.pwm_enA1 = GPIO.PWM(self.enA1, 1000)
+        self.pwm_enB1 = GPIO.PWM(self.enB1, 1000)
+
+        self.pwm_enA2 = GPIO.PWM(self.enA2, 1000)
+        self.pwm_enB2 = GPIO.PWM(self.enB2, 1000)
+
+        self.pwm_enA1.stop()
+        self.pwm_enB1.stop()
+        self.pwm_enA2.stop()
+        self.pwm_enB2.stop()
+
+    def pwm_controller(self, manage_list: list):
+        left, right = manage_list
+        left = int(left * 100)
+        right = int(right * 100)
+        self.logger.debug(f'left : {left}')
+        self.logger.debug(f'right : {right}')
+
+        if left >= 0 and right >= 0:
+
+            self.pwm_enA1.start(abs(left))
+            GPIO.output(self.in11, GPIO.HIGH)
+            GPIO.output(self.in12, GPIO.LOW)
+
+            self.pwm_enB1.start(abs(right))
+            GPIO.output(self.in13, GPIO.HIGH)
+            GPIO.output(self.in14, GPIO.LOW)
+
+
+        elif left < 0 and right < 0:
+
+            self.pwm_enA1.start(abs(left))
+            GPIO.output(self.in11, GPIO.LOW)
+            GPIO.output(self.in12, GPIO.HIGH)
+
+            self.pwm_enB1.start(abs(right))
+            GPIO.output(self.in13, GPIO.LOW)
+            GPIO.output(self.in14, GPIO.HIGH)
+
+        elif left >= 0 and right < 0:
+
+            self.pwm_enA1.start(abs(left))
+            GPIO.output(self.in11, GPIO.HIGH)
+            GPIO.output(self.in12, GPIO.LOW)
+
+            self.pwm_enB1.start(abs(right))
+            GPIO.output(self.in13, GPIO.LOW)
+            GPIO.output(self.in14, GPIO.HIGH)
+
+        elif left < 0 and right >= 0:
+
+            self.pwm_enA1.start(abs(left))
+            GPIO.output(self.in11, GPIO.LOW)
+            GPIO.output(self.in12, GPIO.HIGH)
+
+            self.pwm_enB1.start(abs(right))
+            GPIO.output(self.in13, GPIO.HIGH)
+            GPIO.output(self.in14, GPIO.LOW)
+
+        elif left == 0 and right == 0:
+
+            self.pwm_enA1.stop()
+            GPIO.output(self.in11, GPIO.LOW)
+            GPIO.output(self.in12, GPIO.LOW)
+
+            self.pwm_enB1.stop()
+            GPIO.output(self.in13, GPIO.LOW)
+            GPIO.output(self.in14, GPIO.LOW)
