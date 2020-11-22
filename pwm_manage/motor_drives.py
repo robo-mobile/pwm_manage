@@ -9,58 +9,30 @@ class driver():
 
 class StandartPWM(driver):
 
-    channel1 = 35
-    channel2 = 36
-    channel3 = 37
-    channel4 = 38
+    def __init__(self):
 
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setwarnings(False)
-        # logger.debug('Starting servo service!')
+        self.channel1 = 35
+        self.channel2 = 36
+        self.channel3 = 37
+        self.channel4 = 38
 
-    GPIO.setup(channel1, GPIO.OUT)
-    GPIO.setup(channel2, GPIO.OUT)
-    GPIO.setup(channel3, GPIO.OUT)
-    GPIO.setup(channel4, GPIO.OUT)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
 
-    pwm_channel1 = GPIO.PWM(channel1, 1000)
-    pwm_channel2 = GPIO.PWM(channel2, 1000)
-    pwm_channel3 = GPIO.PWM(channel3, 1000)
-    pwm_channel4 = GPIO.PWM(channel4, 1000)
+        GPIO.setup(self.channel1, GPIO.OUT)
+        GPIO.setup(self.channel2, GPIO.OUT)
+        GPIO.setup(self.channel3, GPIO.OUT)
+        GPIO.setup(self.channel4, GPIO.OUT)
 
-    pwm_channel1.stop()
-    pwm_channel2.stop()
-    pwm_channel3.stop()
-    pwm_channel4.stop()
+        self.pwm_channel1 = GPIO.PWM(self.channel1, 1000)
+        self.pwm_channel2 = GPIO.PWM(self.channel2, 1000)
+        self.pwm_channel3 = GPIO.PWM(self.channel3, 1000)
+        self.pwm_channel4 = GPIO.PWM(self.channel4, 1000)
 
-    # def __init__(self):
-    #     pass
-    # def __init__(self, manage_list: list):
-    #
-    #     self.manage_list = manage_list
-    #     self.channel1 = 35
-    #     self.channel2 = 36
-    #     self.channel3 = 37
-    #     self.channel4 = 38
-    #
-    #     GPIO.setmode(GPIO.BOARD)
-    #     GPIO.setwarnings(False)
-    #     self.logger.debug('Starting servo service!')
-    #
-    #     GPIO.setup(self.channel1, GPIO.OUT)
-    #     GPIO.setup(self.channel2, GPIO.OUT)
-    #     GPIO.setup(self.channel3, GPIO.OUT)
-    #     GPIO.setup(self.channel4, GPIO.OUT)
-    #
-    #     self.pwm_channel1 = GPIO.PWM(self.channel1, 1000)
-    #     self.pwm_channel2 = GPIO.PWM(self.channel2, 1000)
-    #     self.pwm_channel3 = GPIO.PWM(self.channel3, 1000)
-    #     self.pwm_channel4 = GPIO.PWM(self.channel4, 1000)
-    #
-    #     self.pwm_channel1.stop()
-    #     self.pwm_channel2.stop()
-    #     self.pwm_channel3.stop()
-    #     self.pwm_channel4.stop()
+        self.pwm_channel1.stop()
+        self.pwm_channel2.stop()
+        self.pwm_channel3.stop()
+        self.pwm_channel4.stop()
 
     def pwm_controller(self, manage_list):
         left, right = manage_list

@@ -10,8 +10,7 @@ class WebSoketRunner:
     async def consumer(self, message):
         output_list = json.loads(message)
         self.logger.debug(f'INPUT json: {output_list}')
-        engine = self.engine
-        engine.pwm_controller(manage_list=output_list)
+        engine = self.engine.pwm_controller(manage_list=output_list)
 
 
     async def websocket_server(self, websocket, path):
