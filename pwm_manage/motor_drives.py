@@ -9,16 +9,15 @@ class driver():
 
 class StandartPWM(driver):
 
-    def __init__(self):
+    channel1 = 35
+    channel2 = 36
+    channel3 = 37
+    channel4 = 38
 
-        self.channel1 = 35
-        self.channel2 = 36
-        self.channel3 = 37
-        self.channel4 = 38
+    def __init__(self):
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-
 
         GPIO.setup(self.channel1, GPIO.OUT)
         GPIO.setup(self.channel2, GPIO.OUT)
@@ -78,20 +77,17 @@ class StandartPWM(driver):
 
 
 class L298N(driver):
+    enA = 33
+    in1 = 35
+    in2 = 36
 
-    def __init__(self, manage_list: list):
-        self.manage_list = manage_list
-        self.enA = 33
-        self.in1 = 35
-        self.in2 = 36
+    enB = 37
+    in3 = 38
+    in4 = 40
 
-        self.enB = 37
-        self.in3 = 38
-        self.in4 = 40
-
+    def __init__(self):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
-        self.logger.info('Starting servo service!')
 
         GPIO.setup(self.enA, GPIO.OUT)
         GPIO.setup(self.enB, GPIO.OUT)
@@ -111,12 +107,12 @@ class L298N(driver):
         self.pwm_enA.stop()
         self.pwm_enB.stop()
 
-    def pwm_controller(self):
-        left, right = self.manage_list
+    def pwm_controller(self, manage_list: list):
+        left, right = manage_list
         left = int(left * 100)
         right = int(right * 100)
-        self.logger.info(f'left : {left}')
-        self.logger.info(f'right : {right}')
+        self.logger.debug(f'left : {left}')
+        self.logger.debug(f'right : {right}')
 
         if left >= 0 and right >= 0:
 
@@ -171,4 +167,42 @@ class L298N(driver):
 
 
 class DL298N(driver):
-    pass
+
+    enA1 = 33
+    in11 = 35
+    in12 = 36
+
+    enB1 = 37
+    in13 = 38
+    in14 = 40
+
+    enA2 = 33
+    in21 = 35
+    in22 = 36
+
+    enB2 = 37
+    in23 = 38
+    in24 = 40
+
+    def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
+        self.logger.debug('Starting servo service!')
+
+        GPIO.setup(self.enA1, GPIO.OUT)
+        GPIO.setup(self.enB1, GPIO.OUT)
+        GPIO.setup(self.in11, GPIO.OUT)
+        GPIO.setup(self.in12, GPIO.OUT)
+        GPIO.setup(self.in13, GPIO.OUT)
+        GPIO.setup(self.in14, GPIO.OUT)
+
+        GPIO.output(self.in11, GPIO.LOW)
+        GPIO.output(self.in12, GPIO.LOW)
+        GPIO.output(self.in13, GPIO.LOW)
+        GPIO.output(self.in14, GPIO.LOW)
+
+        self.pwm_enA = GPIO.PWM(self.enA1, 1000)
+        self.pwm_enB = GPIO.PWM(self.enB1, 1000)
+
+        self.pwm_enA.stop()
+        self.pwm_enB.stop()

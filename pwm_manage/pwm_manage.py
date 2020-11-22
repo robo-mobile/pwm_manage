@@ -28,7 +28,7 @@ logger.addHandler(journald_handler)
 logger.addHandler(logging.StreamHandler())
 
 # optionally set the logging level
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 @app.command()
@@ -40,7 +40,7 @@ def init():
     redundancy init
     """
     if not os.path.isfile("config.toml"):
-        print (f"Generate config.toml config file")
+        print(f"Generate config.toml config file")
         with open("config.toml", 'w') as f:
             f.write(def_config)
 
@@ -62,12 +62,11 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         if not os.path.isfile("./config.toml"):
             print("Config file not exists!")
             exit(2)
-    if conf is not None: 
-        config = conf     
-    
+    if conf is not None:
+        config = conf
+
     config = toml.load(config)
     if config['pwm_type'] == "standart":
-
         StandartPWM.logger = logger
         engine = StandartPWM
         runner = WebSoketRunner(logger=logger, engine=engine)
