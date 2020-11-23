@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Powerful and Lightweight Python Script
+Powerful and Lightweight Python Script for managing engine controllers
 """
 
 __version__ = "0.0.1"

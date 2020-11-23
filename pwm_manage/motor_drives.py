@@ -320,4 +320,3 @@ class DL298N(driver):
             self.pwm_enB2.stop()
             GPIO.output(self.in23, GPIO.LOW)
             GPIO.output(self.in24, GPIO.LOW)
-
