@@ -2,7 +2,7 @@ def_config = '''
 
 title = "PWM manager config"
 
-pwm_type = "standart"           # choose  one of: standart/L292N/DouL292N
+pwm_type = "L9110S"             # choose  one of: L9110S/L298N/DL298N (double DL298N)
 
 log_level = "INFO"              # DEBUG/WARNING/INFO
 

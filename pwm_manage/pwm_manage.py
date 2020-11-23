@@ -66,20 +66,20 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         config = conf
 
     config = toml.load(config)
-    if config['pwm_type'] == "standart":
-        StandartPWM.logger = logger
-        engine = StandartPWM
+    if config['pwm_type'] == "L9110S":
+        L9110S.logger = logger
+        engine = L9110S
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
     elif config['pwm_type'] == "L292N":
-        StandartPWM.logger = logger
+        L298N.logger = logger
         engine = L298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
-    elif config['pwm_type'] == "DouL292N":
-        StandartPWM.logger = logger
+    elif config['pwm_type'] == "DL292N":
+        DL298N.logger = logger
         engine = DL298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()

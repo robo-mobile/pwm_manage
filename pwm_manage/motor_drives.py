@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 
 
-class driver():
+class driver:
     logger: object
     channels: dict
 
 
-class StandartPWM(driver):
+class L9110S(driver):
     channel1 = 35
     channel2 = 36
     channel3 = 37
