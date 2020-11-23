@@ -4,7 +4,7 @@ title = "PWM manager config"
 
 pwm_type = "L9110S"             # choose  one of: L9110S/L298N/DL298N (double DL298N)
 
-log_level = "INFO"              # DEBUG/WARNING/INFO
+log_level = "INFO"              # EMERGENCY/ALERT/CRITICAL/ERROR/WARNING/NOTICE/INFO/DEBUG
 
 # standat pwm engine type
 
