@@ -192,8 +192,6 @@ class DL298N(driver):
     def __init__(self):
 
         super().__init__()
-        for key, value in self.channels.items():
-            setattr(self, key, value)
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
