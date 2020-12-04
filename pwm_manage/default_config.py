@@ -27,17 +27,17 @@ log_level = "INFO"              # EMERGENCY/ALERT/CRITICAL/ERROR/WARNING/NOTICE/
 # double l298n engine type
 
 # [outputs]
-# enA1 = 35
-# channel11 = 36
-# channel12 = 37
-# enB1 = 40
-# channel13 = 38
-# channel14 = 39
-# enA2 = 35
-# channel21 = 36
-# channel22 = 37
-# enB2 = 40
-# channel23 = 38
-# channel24 = 39
+# enA1 = 40
+# channel11 = 38
+# channel12 = 36
+# enB1 = 33
+# channel13 = 35
+# channel14 = 37
+# enA2 = 32
+# channel21 = 31
+# channel22 = 29
+# enB2 = 26
+# channel23 = 27
+# channel24 = 28
 '''
 
