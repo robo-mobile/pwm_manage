@@ -84,13 +84,13 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
+
 @app.command()
 def test(engines: int = typer.Option(2, help="Use 2 or 4 engines", show_default=True),
          w_time: int = typer.Option(2, help="Waiting time", show_default=True)
-          ):
+         ):
     test_ws = Test_WS(engines, w_time)
     test_ws.run()
-
 
 
 if __name__ == '__main__':

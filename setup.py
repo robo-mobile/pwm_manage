@@ -8,7 +8,7 @@ setuptools.setup(
 
      name='pwm_manage',
 
-     version='0.0.1',
+     version='1.0.0',
 
      packages=['pwm_manage'] ,
 
