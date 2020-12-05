@@ -71,20 +71,21 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
-    elif config['pwm_type'] == "L292N":
+    elif config['pwm_type'] == "L298N":
         L298N.logger = logger
         engine = L298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
-    elif config['pwm_type'] == "DL292N":
+    elif config['pwm_type'] == "DL298N":
         print("Start engine")
-        DL298N.logger = logger
-        DL298N.channels = config['outputs']
+
         engine = DL298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         print("Start runner")
         runner.start()
+    else:
+        logger.error(f'Wrong config!')
 
 
 @app.command()
