@@ -39,11 +39,8 @@ class driver:
         for key, value in self.channels.items():
             setattr(self, key, value)
 
+
 class L9110S(driver):
-    # channel1 = 35
-    # channel2 = 36
-    # channel3 = 37
-    # channel4 = 38
 
     def __init__(self):
 
@@ -70,8 +67,7 @@ class L9110S(driver):
         left, right = manage_list
         left = int(left * 100)
         right = int(right * 100)
-        self.logger.debug(f'left : {left}')
-        self.logger.debug(f'right : {right}')
+        self.logger.debug(f'left : {left}, right : {right}')
 
         if left >= 0 and right >= 0:
             self.pwm_channel1.start(abs(left))
@@ -109,13 +105,6 @@ class L9110S(driver):
 
 
 class L298N(driver):
-    # enA = 33
-    # in1 = 35
-    # in2 = 36
-    #
-    # enB = 37
-    # in3 = 38
-    # in4 = 40
 
     def __init__(self):
 
@@ -323,8 +312,6 @@ class DL298N(driver):
             По кругу налево
             """
 
-
-
             self.pwm_enA1.start(abs(a_right))
             GPIO.output(self.channel13, GPIO.HIGH)
             GPIO.output(self.channel14, GPIO.LOW)
@@ -363,7 +350,7 @@ class DL298N(driver):
 
 
         elif a_left == 0 and a_right < 0 and b_left < 0 and b_right == 0:
-            """
+            """ 
             Наискось назад направо
             """
             self.pwm_enA1.start(abs(a_left))
