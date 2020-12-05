@@ -173,23 +173,6 @@ class L298N(driver):
 class DL298N(driver):
     """Колеса Илона"""
 
-    # enA1 = 40
-    # in11 = 38
-    # in12 = 36
-    #
-    # enB1 = 33
-    # in13 = 35
-    # in14 = 37
-    #
-    # enA2 = 32
-    # in21 = 31
-    # in22 = 29
-    #
-    # enB2 = 26
-    # in23 = 27
-    # in24 = 28
-
-
     def __init__(self, *args, **kwargs):
         super().__init__()
 
@@ -199,27 +182,27 @@ class DL298N(driver):
 
         GPIO.setup(self.enA1, GPIO.OUT)
         GPIO.setup(self.enB1, GPIO.OUT)
-        GPIO.setup(self.in11, GPIO.OUT)
-        GPIO.setup(self.in12, GPIO.OUT)
-        GPIO.setup(self.in13, GPIO.OUT)
-        GPIO.setup(self.in14, GPIO.OUT)
+        GPIO.setup(self.channel11, GPIO.OUT)
+        GPIO.setup(self.channel12, GPIO.OUT)
+        GPIO.setup(self.channel13, GPIO.OUT)
+        GPIO.setup(self.channel14, GPIO.OUT)
 
         GPIO.setup(self.enA2, GPIO.OUT)
         GPIO.setup(self.enB2, GPIO.OUT)
-        GPIO.setup(self.in21, GPIO.OUT)
-        GPIO.setup(self.in22, GPIO.OUT)
-        GPIO.setup(self.in23, GPIO.OUT)
-        GPIO.setup(self.in24, GPIO.OUT)
+        GPIO.setup(self.channel21, GPIO.OUT)
+        GPIO.setup(self.channel22, GPIO.OUT)
+        GPIO.setup(self.channel23, GPIO.OUT)
+        GPIO.setup(self.channel24, GPIO.OUT)
 
-        GPIO.output(self.in11, GPIO.LOW)
-        GPIO.output(self.in12, GPIO.LOW)
-        GPIO.output(self.in13, GPIO.LOW)
-        GPIO.output(self.in14, GPIO.LOW)
+        GPIO.output(self.channel11, GPIO.LOW)
+        GPIO.output(self.channel12, GPIO.LOW)
+        GPIO.output(self.channel13, GPIO.LOW)
+        GPIO.output(self.channel14, GPIO.LOW)
 
-        GPIO.output(self.in21, GPIO.LOW)
-        GPIO.output(self.in22, GPIO.LOW)
-        GPIO.output(self.in23, GPIO.LOW)
-        GPIO.output(self.in24, GPIO.LOW)
+        GPIO.output(self.channel21, GPIO.LOW)
+        GPIO.output(self.channel22, GPIO.LOW)
+        GPIO.output(self.channel23, GPIO.LOW)
+        GPIO.output(self.channel24, GPIO.LOW)
 
         self.pwm_enA1 = GPIO.PWM(self.enA1, 1000)
         self.pwm_enB1 = GPIO.PWM(self.enB1, 1000)
@@ -246,20 +229,20 @@ class DL298N(driver):
             """
 
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.HIGH)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.HIGH)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.HIGH)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.HIGH)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.HIGH)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.HIGH)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.HIGH)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.HIGH)
+            GPIO.output(self.channel24, GPIO.LOW)
 
 
 
@@ -269,20 +252,20 @@ class DL298N(driver):
             """
 
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.HIGH)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.HIGH)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.HIGH)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.HIGH)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.HIGH)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.HIGH)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.HIGH)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.HIGH)
 
         elif a_left > 0 and a_right < 0 and b_left > 0 and b_right < 0:
             """
@@ -290,20 +273,20 @@ class DL298N(driver):
             """
 
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.HIGH)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.HIGH)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.HIGH)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.HIGH)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.HIGH)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.HIGH)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.HIGH)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.HIGH)
 
         elif a_left < 0 and a_right > 0 and b_left < 0 and b_right > 0:
             """
@@ -313,40 +296,40 @@ class DL298N(driver):
 
 
             self.pwm_enA1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.HIGH)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.HIGH)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.HIGH)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.HIGH)
 
             self.pwm_enA2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.HIGH)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.HIGH)
+            GPIO.output(self.channel24, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.HIGH)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.HIGH)
 
         elif a_left > 0 and a_right == 0 and b_left == 0 and b_right > 0:
             """
             Наискось вперед направо
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.HIGH)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.HIGH)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.HIGH)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.HIGH)
+            GPIO.output(self.channel24, GPIO.LOW)
 
 
         elif a_left == 0 and a_right < 0 and b_left < 0 and b_right == 0:
@@ -354,100 +337,100 @@ class DL298N(driver):
             Наискось назад направо
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.HIGH)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.HIGH)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.HIGH)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.HIGH)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.LOW)
 
         elif a_left == 0 and a_right > 0 and b_left > 0 and b_right == 0:
             """
             Наискось вперед направо
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.HIGH)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.HIGH)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.HIGH)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.HIGH)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.LOW)
 
         elif a_left < 0 and a_right == 0 and b_left == 0 and b_right < 0:
             """
             Наискось назад направо
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.HIGH)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.HIGH)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.HIGH)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.HIGH)
 
         elif a_left > 0 and a_right < 0 and b_left < 0 and b_right > 0:
             """
             В бок направо
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.HIGH)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.HIGH)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.HIGH)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.HIGH)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.HIGH)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.HIGH)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.HIGH)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.HIGH)
+            GPIO.output(self.channel24, GPIO.LOW)
 
         elif a_left < 0 and a_right > 0 and b_left > 0 and b_right < 0:
             """
             В бок налево
             """
             self.pwm_enA1.start(abs(a_left))
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.HIGH)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.HIGH)
 
             self.pwm_enB1.start(abs(a_right))
-            GPIO.output(self.in13, GPIO.HIGH)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.HIGH)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.start(abs(b_left))
-            GPIO.output(self.in21, GPIO.HIGH)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.HIGH)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.start(abs(b_right))
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.HIGH)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.HIGH)
 
         elif a_left == 0 and a_right == 0 and b_left == 0 and b_right == 0:
             """
@@ -455,35 +438,35 @@ class DL298N(driver):
             """
 
             self.pwm_enA1.stop()
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.stop()
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.stop()
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.stop()
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.LOW)
 
         else:
             self.logger.error(f'Wrong data...')
             self.pwm_enA1.stop()
-            GPIO.output(self.in11, GPIO.LOW)
-            GPIO.output(self.in12, GPIO.LOW)
+            GPIO.output(self.channel11, GPIO.LOW)
+            GPIO.output(self.channel12, GPIO.LOW)
 
             self.pwm_enB1.stop()
-            GPIO.output(self.in13, GPIO.LOW)
-            GPIO.output(self.in14, GPIO.LOW)
+            GPIO.output(self.channel13, GPIO.LOW)
+            GPIO.output(self.channel14, GPIO.LOW)
 
             self.pwm_enA2.stop()
-            GPIO.output(self.in21, GPIO.LOW)
-            GPIO.output(self.in22, GPIO.LOW)
+            GPIO.output(self.channel21, GPIO.LOW)
+            GPIO.output(self.channel22, GPIO.LOW)
 
             self.pwm_enB2.stop()
-            GPIO.output(self.in23, GPIO.LOW)
-            GPIO.output(self.in24, GPIO.LOW)
+            GPIO.output(self.channel23, GPIO.LOW)
+            GPIO.output(self.channel24, GPIO.LOW)
