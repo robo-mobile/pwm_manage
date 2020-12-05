@@ -67,12 +67,14 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
     config = toml.load(config)
     if config['pwm_type'] == "L9110S":
         L9110S.logger = logger
+        L9110S.channels = config['outputs']
         engine = L9110S
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()
 
     elif config['pwm_type'] == "L298N":
         L298N.logger = logger
+        L298N.channels = config['outputs']
         engine = L298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         runner.start()

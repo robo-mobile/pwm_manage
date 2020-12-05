@@ -16,8 +16,13 @@ class Test_WS():
             self.list_range = ['[1,1]', '[0,0]', '[1,0]', '[0,1]', '[0.1,0]', '[0,0.1]',
                                '[1,-1]', '[-1,-1]', '[-1,1]', '[-1,0]', '[0,-1]']
         elif engines == 4:
-            self.list_range = ['[1,1,1,1]', '[0,0,0,0]', '[1,0,1,0]', '[0,1,0,1]', '[0.1,0,0.1,0]', '[0,0.1,0,0.1]',
-                               '[1,-1,1,-1]', '[-1,-1,-1,-1]', '[-1,1,-1,1]', '[-1,0,-1,0]', '[0,-1,0,-1]']
+            # self.list_range = ['[1,1,1,1]', '[0,0,0,0]', '[1,0,1,0]', '[0,1,0,1]', '[0.1,0,0.1,0]', '[0,0.1,0,0.1]',
+            #                    '[1,-1,1,-1]', '[-1,-1,-1,-1]', '[-1,1,-1,1]', '[-1,0,-1,0]', '[0,-1,0,-1]']
+            v = '0.2'
+            self.list_range = [f'[{v},{v},{v},{v}]', f'[-{v},-{v},-{v},-{v}]', f'[{v},-{v},{v},-{v}]',
+                               f'[-{v},{v},-{v},{v}]', f'[{v},0,0,{v}]', f'[-{v},0,0,-{v}]',
+                               f'[0,{v},{v},0]', f'[0,-{v},-{v},0]', f'[{v},-{v},{v},-{v}]',
+                               f'[-{v},{v},-{v},{v}]', '[0,0,0,0]']
         self.waiting_time = waiting_time
 
     def run(self):
@@ -35,6 +40,7 @@ class Test_WS():
         async def hello():
             uri = f"ws://{self.host}:{self.port}"
             for i in self.list_range:
+                print(f"i = {i}")
                 async with websockets.connect(uri) as websocket:
                     await websocket.send(i)
                     time.sleep(self.waiting_time)

@@ -33,11 +33,11 @@ log_level = "INFO"              # EMERGENCY/ALERT/CRITICAL/ERROR/WARNING/NOTICE/
 # enB1 = 33
 # channel13 = 35
 # channel14 = 37
-# enA2 = 32
-# channel21 = 31
-# channel22 = 29
-# enB2 = 26
-# channel23 = 27
-# channel24 = 28
+# enA2 = 11
+# channel21 = 13
+# channel22 = 15
+# enB2 = 12
+# channel23 = 16
+# channel24 = 18
 '''
 
