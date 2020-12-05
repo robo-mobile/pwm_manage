@@ -81,7 +81,7 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         print("Start engine")
         DL298N.logger = logger
         DL298N.channels = config['outputs']
-        engine = DL298N()
+        engine = DL298N
         runner = WebSoketRunner(logger=logger, engine=engine)
         print("Start runner")
         runner.start()
