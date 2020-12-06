@@ -10,15 +10,14 @@ class Test_WS():
     host = "127.0.0.1"
     port = 5685
 
-    def __init__(self, engines: int, waiting_time: int):
+    def __init__(self, engines: int, waiting_time: int, power:str):
         self.list_range: list
+        print(f"Power: {power}")
         if engines == 2:
             self.list_range = ['[1,1]', '[0,0]', '[1,0]', '[0,1]', '[0.1,0]', '[0,0.1]',
                                '[1,-1]', '[-1,-1]', '[-1,1]', '[-1,0]', '[0,-1]']
         elif engines == 4:
-            # self.list_range = ['[1,1,1,1]', '[0,0,0,0]', '[1,0,1,0]', '[0,1,0,1]', '[0.1,0,0.1,0]', '[0,0.1,0,0.1]',
-            #                    '[1,-1,1,-1]', '[-1,-1,-1,-1]', '[-1,1,-1,1]', '[-1,0,-1,0]', '[0,-1,0,-1]']
-            v = '0.5'
+            v = power
             self.list_range = [f'[{v},{v},{v},{v}]', f'[-{v},-{v},-{v},-{v}]', f'[{v},-{v},{v},-{v}]',
                                f'[-{v},{v},-{v},{v}]', f'[{v},0,0,{v}]', f'[-{v},0,0,-{v}]',
                                f'[0,{v},{v},0]', f'[0,-{v},-{v},0]', f'[{v},-{v},-{v},{v}]',
