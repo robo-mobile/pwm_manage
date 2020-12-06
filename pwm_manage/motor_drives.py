@@ -244,7 +244,7 @@ class DL298N(driver):
 
         if a_left >= 0 and a_right >= 0 and b_left >= 0 and b_right >= 0:
             """
-            Приямо вперед 
+            Прямо вперед 
             """
 
             self.pwm_enA1.start(abs(a_left))
@@ -267,7 +267,7 @@ class DL298N(driver):
 
         elif a_left < 0 and a_right < 0 and b_left < 0 and b_right < 0:
             """
-            Приямо назад
+            Прямо назад
             """
 
             self.pwm_enA1.start(abs(a_left))
