@@ -33,10 +33,10 @@ logger.setLevel(logging.DEBUG)
 @app.command()
 def init():
     """
-    Create redundancy.toml config file
+    Create config.toml file
 
     Example of using:
-    redundancy init
+    pwm init
     """
     if not os.path.isfile("config.toml"):
         print(f"Generate config.toml config file")
@@ -65,6 +65,7 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         config = conf
 
     config = toml.load(config)
+    print("Awaiting control command...")
     if config['pwm_type'] == "L9110S":
         L9110S.logger = logger
         L9110S.channels = config['outputs']
@@ -80,12 +81,10 @@ def start(conf: str = typer.Option("/etc/pwm/config.toml", help="PWM config.", s
         runner.start()
 
     elif config['pwm_type'] == "DL298N":
-        print("Start engine")
         DL298N.logger = logger
         DL298N.channels = config['outputs']
         engine = DL298N
         runner = WebSoketRunner(logger=logger, engine=engine)
-        print("Start runner")
         runner.start()
 
     else:
@@ -97,6 +96,12 @@ def test(engines: int = typer.Option(2, help="Use 2 or 4 engines", show_default=
          w_time: int = typer.Option(2, help="Waiting time", show_default=True),
          power: int = typer.Option(50, help="Power %", show_default=True)
          ):
+    """
+    Use for the test engines
+
+    Example of using:
+    pwm test --engines 4 --w-time 1 --power 25
+    """
     v_power = str(power/100)
     test_ws = Test_WS(engines, w_time, v_power)
     test_ws.run()

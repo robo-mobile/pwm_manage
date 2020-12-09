@@ -195,7 +195,6 @@ class DL298N(driver):
     def __init__(self, *args, **kwargs):
         super().__init__()
 
-        print("init class")
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
 

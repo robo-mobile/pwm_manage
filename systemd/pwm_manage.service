@@ -3,6 +3,7 @@ Description=pwm_manage service for systemd
 After=network.target
 
 [Service]
+User=pi
 Type=simple
 ExecStart=/usr/bin/pwm_manage/run_app.sh
 Restart=on-abort
