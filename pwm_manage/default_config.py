@@ -2,8 +2,9 @@ def_config = '''
 
 title = "PWM manager config"
 
-pwm_type = "L9110S"             # choose  one of: L9110S/L298N/DL298N (double DL298N)
-
+pwm_type = "L9110S"             # choose  one of: L9110S/L298N/DL298N (double L298N with ilon wheels)/ 
+                                # DL298NU (double L298N with usual wheels)
+                                
 log_level = "INFO"              # EMERGENCY/ALERT/CRITICAL/ERROR/WARNING/NOTICE/INFO/DEBUG
 
 # standat pwm engine type
@@ -24,7 +25,7 @@ log_level = "INFO"              # EMERGENCY/ALERT/CRITICAL/ERROR/WARNING/NOTICE/
 # channel3 = 38
 # channel4 = 39
 
-# double l298n engine type
+# double l298n engine type (ilon and usual wheel)
 
 # [outputs]
 # enA1 = 40
