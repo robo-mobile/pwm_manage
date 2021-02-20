@@ -1,0 +1,15 @@
+---
+# Run ansible-playbook command with arg -l SUBSET, --limit=SUBSET to provision
+# only specific host(s) when a group is set in 'hosts' parameter.
+
+- hosts: rpis
+
+  vars_files:
+   - config.yml
+
+  # roles:
+  #   - bdellegrazie.ca-certificates
+
+  tasks:
+    - import_tasks: tasks/update_system.yml
+    - import_tasks: tasks/basic_setup.yml

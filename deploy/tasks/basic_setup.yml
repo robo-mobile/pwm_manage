@@ -1,0 +1,61 @@
+---
+- name: Install base system packages.
+  package:
+    name: "{{ rpi_base_packages }}"
+    state: present
+    update_cache: yes
+  tags: 
+    - basic
+
+- name: Add system_user to the sudo group.
+  user:
+    name: "{{ system_user }}"
+    groups: sudo
+    append: yes
+  tags: 
+    - basic
+
+- name: Copy .bashrc configuration file.
+  copy:
+    src: bashrc
+    dest: "/home/{{ system_user }}/.bashrc"
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: 0640
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+  tags: 
+    - basic
+
+- name: Ensure ~/.local/bin directory exists.
+  file:
+    path: "/home/{{ system_user }}/.local/bin"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: 0755
+  tags: 
+    - tmux
+    - basic
+
+- name: Copy mem_info script.
+  copy:
+    src: mem_info
+    dest: "/home/{{ system_user }}/.local/bin/mem_info"
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: 0755
+  tags: 
+    - tmux
+    - basic
+
+- name: Copy .tmux.conf file.
+  copy:
+    src: tmux.conf
+    dest: "/home/{{ system_user }}/.tmux.conf"
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: 0640
+  tags: 
+    - tmux
+    - basic
+  

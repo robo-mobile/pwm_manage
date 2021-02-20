@@ -1,0 +1,34 @@
+---
+rpi_base_packages:
+  - atop
+  - ca-certificates
+  - curl
+  - git
+  - htop
+  - iftop
+  - iotop
+  - lsof
+  - mc
+  - net-tools
+  - python3-venv
+  - python3.7
+  - python3.7-venv
+  - python-pkg-resources
+  - rsync
+  - sockstat
+  - strace
+  - sudo
+  - tmux
+  - tree
+  - unzip
+  - vim
+  - vim-nox
+  - wiringpi
+
+system_user: 'pwm'
+prj_path: '/home/{{ system_user }}/pwm'
+prj_venv_path: '{{prj_path}}/venv'
+pip_requirements: "requirements.txt"
+http_host: 'pwm.robot.sh'
+install_req_local: no
+upgrade_system_packages: no

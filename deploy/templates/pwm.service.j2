@@ -1,0 +1,14 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=pwm_manage service for systemd
+After=network.target
+
+[Service]
+User={{system_user}}
+WorkingDirectory={{ prj_path }}
+Environment=VIRTUAL_ENV={{ prj_venv_path_ }}
+Environment=PATH="PATH={{ prj_venv_path }}/bin"
+# Environment=FLASK_APP=web/run.py
+# Environment=FLASK_DEBUG=True
+ExecStart={{ prj_venv_path }}/bin/pwm start
+Restart=always
