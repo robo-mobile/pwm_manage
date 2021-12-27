@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  pwm:
+    build: ./
+    image: docker.visonic.com/system/performance:0.0.1
+    container_name: performance
+    volumes:
+     - ./PSP:/usr/local/performance:rw
+
+    environment:
+      - TZ=Europe/Kiev
+
+    networks:
+      - perfomance
+
+networks:
+  perfomance:
